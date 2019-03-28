@@ -8,7 +8,7 @@ gem 'rails', '~> 5.2.2', '>= 5.2.2.1'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
   gem 'jquery-rails'
-
+  gem 'pg'
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -37,8 +37,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 group :production do
-  gem 'pg'
-  gem 'rails_12factor'
+
+
 end
 
 group :development, :test do
