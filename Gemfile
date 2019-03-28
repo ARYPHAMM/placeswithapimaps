@@ -42,7 +42,6 @@ group :production do
 end
 
 group :development, :test do
-  # gem 'sqlite3'
   gem 'geocoder'
   gem 'byebug'
 end
