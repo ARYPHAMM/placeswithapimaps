@@ -4,17 +4,8 @@
     <title>GmapsRailsExample</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-       <%=  javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key='+Rails.application.credentials.google_maps_api_key+'&callback=initMap' %>
-
-<!--      javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key='+Rails.application.credentials.google_maps_api_key %>
- -->    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-<!--          <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL1MRPaV2yM6Zzyt3JjRnnkon1WgqiJvE&callback=initMap"
-  type="text/javascript"></script> -->
-<!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
- -->
-
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL1MRPaV2yM6Zzyt3JjRnnkon1WgqiJvE&libraries=places"></script>
+    <%= stylesheet_link_tag :all %>
+ <%= javascript_include_tag :defaults %>
 
 
   </head>
