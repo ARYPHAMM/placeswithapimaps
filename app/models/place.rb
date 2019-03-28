@@ -1,3 +1,7 @@
 class Place < ApplicationRecord
-	  geocoded_by :name
+
+extend Geocoder::Model::ActiveRecord
+
+  geocoded_by :name
+  reverse_geocoded_by :latitude, :longitude
 end
