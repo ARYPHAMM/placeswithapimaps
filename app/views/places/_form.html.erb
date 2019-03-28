@@ -1,0 +1,84 @@
+<%= (Geocoder::Calculations.distance_between([10.80076,106.679557], [10.801603,106.663249])).ceil(1) %>
+<% provide :head_tags do %>
+    <meta name='turbolinks-visit-control' content='reload'>
+    <script>
+        document.addEventListener("DOMContentLoaded", initMap2);
+    </script>
+<% end %>
+<%= form_with(model: place, local: true) do |form| %>
+  <% if place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+      <% place.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name ,:onkeyup => "search(this.value);"  %>
+    <ul id="datasearch">
+    </ul>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+<p>
+  <div id="map2"></div>
+</p>
+
+
+<!-- <input type="text" id="autocomplete"/> -->
+ <input id="searchTextField" type="text" size="50">
+
+    <script>
+
+      function initialize() {
+  var input = document.getElementById('searchTextField');
+  new google.maps.places.Autocomplete(input);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+      function search(e) {
+        $.ajax({
+          url: "/places/changestatus",
+          type: "post",
+          dataType: "script",
+          data: { search: {"address": e}}
+        });
+      }
+
+    </script>
+
+<script type="text/javascript">
+  $(document).ready(function(){ // When the DOM is Ready, then bind the click
+   $("#datasearch").on("click","li", function(e){
+    $('#datasearch li').remove();
+    $("#place_name").val($(this).attr("value"));
+         $.ajax({
+          url: "/places/changestatus",
+          type: "post",
+          dataType: "script",
+          data: { location: {"address": $(this).attr("value")}}
+        });
+  });
+});
+</script>
+ 

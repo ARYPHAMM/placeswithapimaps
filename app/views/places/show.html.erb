@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+<!--   @place.name %>
+ -->
+ <%= Geocoder.search(Geocoder.address("#{@place.latitude.to_s},#{@place.longitude.to_s}")).to_a %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @place.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @place.longitude %>
+</p>
+
+<p>
+    <div id="map"></div>
+</p>
+<% provide :head_tags do %>
+    <meta name='turbolinks-visit-control' content='reload'>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%=@place.latitude%>, <%=@place.longitude%>)
+    });
+    </script>
+<% end %>
+
+
+<%= link_to 'Edit', edit_place_path(@place) %> |
+<%= link_to 'Back', places_path %>

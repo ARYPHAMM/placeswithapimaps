@@ -1,0 +1,18 @@
+
+if (parseInt("<%= @search.length %>") > 0){
+	$('#datasearch li').remove();
+	 x = "<%= @search %>";
+	"<% @search.each do |v|  %>"
+	$( "#datasearch" ).append( "<li value='<%= v %>'  ><%= v %></li> "  );
+	"<% end %>"
+}
+else if("<%= @location %>"){
+   document.getElementById('place_latitude').value = "<%= @location[0] %>";
+   document.getElementById('place_longitude').value =" <%= @location[1] %>";
+   initMap2("<%= @location[0] %>"," <%= @location[1] %>")
+}
+else{
+$("#place_name").val("<%= @place.name %>");
+}
+
+
