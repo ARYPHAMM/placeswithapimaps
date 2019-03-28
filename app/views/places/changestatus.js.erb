@@ -11,7 +11,7 @@ else if("<%= @location %>"){
    document.getElementById('place_longitude').value =" <%= @location[1] %>";
    initMap2("<%= @location[0] %>"," <%= @location[1] %>")
 }
-else{
+if("<%= @place.name %>" != ""){
 $("#place_name").val("<%= @place.name %>");
 }
 

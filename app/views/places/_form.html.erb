@@ -1,4 +1,5 @@
-<!-- (Geocoder::Calculations.distance_between([10.80076,106.679557], [10.801603,106.663249])).ceil(1)  -->
+<%= (Geocoder::Calculations.distance_between([10.80076,106.679557], [10.801603,106.663249])).ceil(1)  %>
+<%= Geocoder.search("423 Nguyễn Kiệm, Phường 9, Phú Nhuận, Hồ Chí Minh").length %>
 <% provide :head_tags do %>
     <meta name='turbolinks-visit-control' content='reload'>
     <script>
@@ -20,7 +21,7 @@
 
   <div class="field">
     <%= form.label :name %>
-    <%= form.text_field :name ,:onkeyup => "search(this.value);"  %>
+    <%= form.text_field :name ,:onkeyup => "search(this.value);",:onchange => "searchaddress(this.value);"  %>
     <ul id="datasearch">
     </ul>
   </div>
@@ -39,23 +40,38 @@
     <%= form.submit %>
   </div>
 <% end %>
-<p>
+<!-- <p>
   <div id="map2"></div>
-</p>
+</p> -->
 
 
 <!-- <input type="text" id="autocomplete"/> -->
- <input id="searchTextField" type="text" size="50">
-
+<!--  <input id="searchTextField" type="text" size="50">
+ -->
     <script>
+      var v = " ";
+      $("#datasearch").on("mouseenter","li", function(e){
+      v  = $(this).attr("value");
+     });
 
-      function initialize() {
-  var input = document.getElementById('searchTextField');
-  new google.maps.places.Autocomplete(input);
-}
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//       function initialize() {
+//   var input = document.getElementById('searchTextField');
+//   new google.maps.places.Autocomplete(input);
+// }
 
+// google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    function searchaddress(e)
+    {
+      // if $('li').on('clicked') 
+      if ($('ul#datasearch li').length == 2 || $('ul#datasearch li').length == 1 )
+      {
+          $('#datasearch li').remove();
+      }
+    }
+    
       function search(e) {
         $.ajax({
           url: "/places/changestatus",
@@ -79,6 +95,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
           data: { location: {"address": $(this).attr("value")}}
         });
   });
+
+
+
+
+
+
+
+
 });
 </script>
  

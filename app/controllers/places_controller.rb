@@ -23,7 +23,7 @@ class PlacesController < ApplicationController
 
   def changestatus
      @search = []
-     @place = Place.new
+     @place =  Place.new
      @location = ""
 
      if params[:search] != nil
@@ -39,6 +39,7 @@ class PlacesController < ApplicationController
      end
 
      if params[:maps] != nil
+      @place = Place.new
      @place.name = Geocoder.address("#{params[:maps][:latitude].to_s},#{params[:maps][:longitude].to_s}", language: "vn").gsub(/\b&#39\b/, 'dog')
      end
      # @place.name = Geocoder.search(Geocoder.address("#{params[:maps][:latitude].to_s},#{params[:maps][:longitude].to_s}")).to_a
