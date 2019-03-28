@@ -48,6 +48,8 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
+     # Geocoder.search("423 Nguyễn Kiệm, Phường 9, Phú Nhuận, Hồ Chí Minh").length 
+
     @place = Place.new(place_params)
 
     respond_to do |format|
