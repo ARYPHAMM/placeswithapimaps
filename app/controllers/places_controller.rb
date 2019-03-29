@@ -48,9 +48,16 @@ class PlacesController < ApplicationController
   # POST /places
   # POST /places.json
   def create
-     # Geocoder.search("423 Nguyễn Kiệm, Phường 9, Phú Nhuận, Hồ Chí Minh").length 
-
+    # JSON.parse(Geocoder.search(params[:place][:name], language: "vn").to_json)[0]["data"]["address"].delete_if {|key, value| key == "postcode"  }.delete_if {|key, value| key == "country_code"}.values.join(',')
     @place = Place.new(place_params)
+    if Geocoder.search(params[:place][:name]).length >= 1
+        @place.name = params[:place][:name]
+        @place.latitude =Geocoder.search(params[:place][:name]).first.coordinates[0]
+        @place.longitude =Geocoder.search(params[:place][:name]).first.coordinates[1]
+    else
+       return 
+    end
+    debugger
 
     respond_to do |format|
       if @place.save
@@ -95,6 +102,9 @@ class PlacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
-      params.require(:place).permit(:name, :latitude, :longitude)
+       # @gcd = Geocoder.search(params[:name])
+
+         params.require(:place).permit(:name, :latitude, :longitude)
+
     end
 end

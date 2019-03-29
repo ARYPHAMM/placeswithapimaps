@@ -2,10 +2,10 @@
 
 <p>
   <strong>Name:</strong>
-<!--   @place.name %>
- -->
- <%= Geocoder.search(Geocoder.address("#{@place.latitude.to_s},#{@place.longitude.to_s}")).to_a %>
-</p>
+ <%= @place.name %>
+
+<!--  Geocoder.search(Geocoder.address("#{@place.latitude.to_s},#{@place.longitude.to_s}")).to_a %>
+ --></p>
 
 <p>
   <strong>Latitude:</strong>
